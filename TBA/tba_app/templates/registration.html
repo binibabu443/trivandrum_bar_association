@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>register</title>
+        {%load static%}
+        <link href="{%static 'css/styles2.css' %}" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-secondary">
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-7">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+                                    <div class="card-body">
+                                        <form action="{% url 'reg' %}" name="myform" method='POST' role="form" onsubmit=" return validate_form()" >
+                                        {%csrf_token%}
+                                            <div class="form-row">
+                                                <div class="col-md-8">
+                                                    <div class="form-group"><label class="small mb-1"> Name</label><input class="form-control py-4"  type="text"  required name="name" required/></div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="form-group"><label class="small mb-1">Mobile</label><input class="form-control py-4"  type="text" name="mobile" id="mobile" required /></div>
+                                                </div>
+                                            
+                                            <div class="form-group col-md-8"><label class="small mb-1">Email</label><input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp"  name="email" required/></div>
+                                            </div>
+                                            <div class="form-row">
+                                            <div class="form-group col-md-8"><label class="small mb-1" >Types</label>
+                                            <select class=" py-4" name="types">
+                                                <option>Family Lawyer</option>
+                                                <option>Criminal Lawyer</option>
+                                                <option>Tax Lawyer</option>
+                                                <option>Corporate Lawyer</option>
+                                                <option>General Practice Lawyer</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-8"><label class="small mb-1">Office Address</label><textarea class="form-control py-4" aria-describedby="emailHelp"  name="officeadd"></textarea></div>
+                                            <div class="form-group col-md-8"><label class="small mb-1">Residential Address</label><textarea class="form-control py-4" aria-describedby="emailHelp"  name="residenceadd"></textarea></div>
+                                            
+                                            
+                                            
+                                            <div class="form-group col-md-8"><label class="small mb-1">Joining Date</label><input class="form-control py-4"  type="date" aria-describedby="emailHelp"  name="joiningdate" required/></div>
+                                            <div class="form-group col-md-8"><label class="small mb-1" >Duration</label>
+                                            <select class=" py-4" name="duration">
+                                                <option value="3 Months">3 Months (Rs.4500)</option>
+                                                <option value="6 Months">6 Months (Rs.9000)</option>
+                                                <option value="1 Year">1 Year (Rs.18000)</option>
+                                                <option value="5 Years">5 Years (Rs.90000)</option>
+                                                </select>
+                                            </div>
+                                            
+                                            
+                                           
+                                            <div class="col-md-8">
+                                                    <div class="form-group"><label class="small mb-1" for="inputPassword">Password</label><input class="form-control py-4" id="inputPassword" type="password"  name="password" id="password" required/></div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="form-group"><label class="small mb-1" for="inputConfirmPassword">Confirm Password</label><input class="form-control py-4" id="inputConfirmPassword" type="password" name="cnfrmpassword" id="cnfrmpassword" required/></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mt-4 mb-0 pl-5 pr-5"><input type="submit" value="Create Account" class="btn btn-primary btn-block" name="submit"></div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <div class="small"><a href="{%url 'login' %}">Have an account? Go to login</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <div id="layoutAuthentication_footer">
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2019</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+    </body>
+    <script>
+        function validate_form()
+        {
+            var mb=document.forms["myform"]["mobile"].value;
+            var str=document.forms["myform"]["password"].value;
+            var str1=document.forms["myform"]["cnfrmpassword"].value;
+            
+            if(mb.length!=10){
+                alert("Invalid mobileno");
+                return false;
+                
+            }
+            else if(str.length<6){
+                alert("Password too short.");
+                return false;
+            }
+            else if(str != str1){
+                alert ("password doesn't match");
+                return false;
+            }
+            /*else{
+                return true;
+            }*/
+            
+        }
+    </script>
+</html>

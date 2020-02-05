@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>approve_requests</title>
+
+        {%load static%}
+        <link href="{%static 'css/styles2.css' %}" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div>
+            <h2>PENDING REQUESTS</h2>
+        </div>
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>MobileNo</th>
+                        <th>Emailid</th>
+                        <th>Type</th>
+                        <th>OfficeAddress</th>
+                        <th>ResidenceAddress</th>
+                        <th>Joiningdate</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%if authors%}
+                    {%for i in authors%}
+                    <tr>
+                        <form action="{% url 'apprv' %}" method=POST>
+                        {% csrf_token %}
+                        <td><input type="text" value="{{i.id}}" name="id" style="width: 15px;" readonly></td>
+                        <td>{{i.name}}</td>
+                        <td>{{i.mobileno}}</td>
+                        <td>{{i.emailid}}</td>
+                        <td>{{i.types}}</td>
+                        <td>{{i.officeadd}}</td>
+                        <td>{{i.residenceadd}}</td>
+                        <td>{{i.joiningdate}}</td>
+                        <td>{{i.duration}}</td>
+                        <td>{{i.status}}</td>
+                        <td><input type="submit" name="approve" value="approve"></td>
+                        </form>
+                    </tr>
+                    {%endfor %}
+                    {%endif %}
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <a href="{%url 'adminhome' %}">Home</a>
+        </div>
+    </body>
+</html>
